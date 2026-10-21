@@ -1,0 +1,31 @@
+name: Build Grok Bot Screensaver
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./macos/build.sh --no-install
+      - run: |
+          ls -la "macos/build/Grok Bot Screensaver.saver/Contents/Resources"
+          codesign -dv --verbose=2 "macos/build/Grok Bot Screensaver.saver"
+      - run: cd macos/build && ditto -c -k --keepParent "Grok Bot Screensaver.saver" ../../GrokBotScreensaver-macOS.zip
+      - uses: actions/upload-artifact@v4
+        with: { name: GrokBotScreensaver-macOS, path: GrokBotScreensaver-macOS.zip }
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - shell: pwsh
+        run: |
+          $res = Get-ChildItem sprites\face-*.png | ForEach-Object { "/resource:$($_.FullName),$($_.Name)" }
+          & "$env:WINDIR\Microsoft.NET\Framework64\v4.0.30319\csc.exe" /nologo /optimize+ /target:winexe "/out:Grok Bot Screensaver.scr" /win32icon:windows\GrokBot.ico /r:System.Windows.Forms.dll /r:System.Drawing.dll @res windows\GrokFaces.cs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Compress-Archive -Path "Grok Bot Screensaver.scr", windows\Install.cmd -DestinationPath GrokBotScreensaver-Windows.zip
+      - uses: actions/upload-artifact@v4
+        with: { name: GrokBotScreensaver-Windows, path: GrokBotScreensaver-Windows.zip }
