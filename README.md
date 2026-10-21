@@ -6,12 +6,12 @@ A Grok Bot face bounces around a black screen. Every time it hits an edge it tur
 
 This is a fan-made screensaver, inspired by the Grok Bot face marks. It isn't an official Grok Bot product.
 
-**Download:** get the zips from this repo's Releases page ([latest release](../../releases/latest)).
+**Download:** get the zips from this repo's Releases page ([latest release](https://github.com/Mike-Three/grok-bot-screensaver/releases/latest)).
 
 | Platform | Download |
 | --- | --- |
-| Windows 10/11 | `GrokBotScreensaver-Windows.zip` from the latest release |
-| macOS 12+ (Apple Silicon and Intel) | `GrokBotScreensaver-macOS.zip` from the latest release |
+| Windows 10/11 | [GrokBotScreensaver-Windows.zip](https://github.com/Mike-Three/grok-bot-screensaver/releases/latest/download/GrokBotScreensaver-Windows.zip) |
+| macOS 12+ (Apple Silicon and Intel) | [GrokBotScreensaver-macOS.zip](https://github.com/Mike-Three/grok-bot-screensaver/releases/latest/download/GrokBotScreensaver-macOS.zip) |
 
 Demo video: [GrokBotScreensaver-demo.mp4](GrokBotScreensaver-demo.mp4). It was recorded on Linux under Mono from an instrumented copy of the Windows code (frame logging, a fixed random seed and a start aimed at a corner), not from the released screensaver. It holds about 45 frames per second of real animation in a 60 fps video.
 
